@@ -1,0 +1,23 @@
+Package: gopherdown
+Title: An updated R Markdown thesis template for the University of Minneosta using the bookdown package
+Version: 0.2.1
+Authors@R: c(
+    person("Andrew", "Zieffler", email = "zief0002@umn.edu", role = c("aut", "cre")),
+    person("Chester", "Ismay", email = "chester.ismay@gmail.com", role = c("aut", "ccp"))
+    )
+Description: Using the bookdown package and LaTeX and Word thesis templates from
+    the University of Minnesota, this package was derived from Chester Ismay's
+    package "thesisdown"
+Depends:
+    R (>= 3.3.0),
+    devtools,
+    tidyverse,
+    bookdown,
+    knitr,
+    kableExtra,
+    formatR
+Imports: yaml
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.2

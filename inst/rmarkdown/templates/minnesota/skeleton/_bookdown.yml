@@ -1,0 +1,19 @@
+book_filename: "thesis"
+chapter_name: "Chapter "
+rmd_files: [
+  "index.Rmd",
+  
+  "chapters/01-chap1.Rmd",
+  "chapters/02-chap2.Rmd",
+  "chapters/03-chap3.Rmd",
+  "chapters/04-chap4.Rmd",
+  "chapters/05-chap5.Rmd",
+  
+  "chapters/90-references.Rmd",
+  "chapters/91-appendix1.Rmd",
+  "chapters/92-appendix2.Rmd"
+  ]
+download: [
+  ["thesis.pdf", "PDF"]
+  ]
+  
