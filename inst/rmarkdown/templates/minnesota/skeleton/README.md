@@ -1,21 +1,25 @@
-# Oregon State University RMarkdown thesis template
+# University of Minnesota RMarkdown thesis template
 
-This is the unofficial Oregon State University RMarkdown thesis template. You 
-can find a copy of this template at https://github.com/zkamvar/beaverdown.
+This is the unofficial University of Minnesota RMarkdown thesis template. You 
+can find a copy of this template at https://github.com/zief0002/gopherdown.
 
-To install the template, be sure you have the following:
+To install and use `{gopherdown}` and use it for your dissertation/thesis, you will need:
 
- - [pandoc][0]
- - [LaTeX][1]
- - [R >= 3.3.0][2]
- - [RStudio][3] (optional, but it helps)
+-   [pandoc \>= 2.16.2](http://pandoc.org/)
+-   [LaTeX dsitribution](https://yihui.org/tinytex/) specifically XeTeX;
+-   [R \>= 3.3.0](https://r-project.org)
+-   [RStudio](https://rstudio.org) (optional, but it helps)
 
-To get this document, you've either opened a new Rmarkdown document from Rstudio
-using the oregonstate template or you've run the followin command in a clean
-working directory:
+Rather than installing a large TeX distribution, I recommend installing
+LaTeX via the `install_tinytex()` function from the R package
+[`{tinytex}`](https://yihui.org/tinytex/).
+
+
+To use `{gopherdown}`, either open a new Rmarkdown document from Rstudio
+using the University of Minnesota template or run the following command in a clean working directory:
 
 ```r
-rmarkdown::draft("index.Rmd", template = "oregonstate", package = "thesisdown")
+rmarkdown::draft("index.Rmd", template = "minnesota", package = "gopherdown")
 ```
 
 ## Rendering
@@ -72,7 +76,3 @@ These should be self explanatory. Store your figures and data here and reference
 them in your document. 
 
 
- [0]: http://pandoc.org/
- [1]: https://www.latex-project.org/get/
- [2]: https://r-project.org
- [3]: https://rstudio.org
