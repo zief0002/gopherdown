@@ -1,21 +1,21 @@
 # References {-}
 
-<!--
-To remove the indentation of the first entry.
--->
-\noindent
 
-<!--
-To create a hanging indent and spacing between entries.  These three lines may need to be removed for styles that don't require the hanging indent.
--->
+\noindent
+    <!-- To remove the indentation of the first entry.-->
 
 \setlength{\parindent}{-0.20in}
 \setlength{\leftskip}{0.20in}
 \setlength{\parskip}{8pt}
-
+    <!--To create a hanging indent and spacing between entries.  
+    These three lines may need to be removed for styles that don't require the hanging indent. -->
+    
 <div id="refs"></div>
+
 
 \setlength{\parindent}{0.20in}
 \setlength{\leftskip}{0pt}
+  <!-- To return to normal indentation and spacingfor the appendices. -->
+
 
 

@@ -2,3 +2,15 @@
 
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel eros sed mauris porttitor semper nec a orci. Nullam vestibulum mi nec condimentum posuere. Pellentesque eget diam id sapien aliquet ullamcorper. Pellentesque blandit nec lectus ut mollis. Praesent in facilisis justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed eget congue leo, sed consequat libero. In rutrum malesuada nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi sollicitudin tortor ut sem facilisis mollis.
+
+
+## Citations
+
+You can cite things by using `[@cite-key]`. Here are four examples:
+
+- I used the `{knitr}` package [@xie:2021].
+- You can also add other things in the citation [e.g., @nijhawan:2015].
+- @baumgartner:2021 seems to be an interesting book.
+- Baumgartner and Silverman suggest that "The Office is cool" [-@baumgartner:2021, p. 43].
+
+Note that everything you cited is included in the *References* section. This will also include any references you included in the `nocite:` YAML field in the `index.Rmd` file.

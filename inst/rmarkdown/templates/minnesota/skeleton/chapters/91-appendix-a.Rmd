@@ -1,0 +1,8 @@
+# (APPENDIX) Appendix {-}
+
+# Extra Material {#appendix-a}
+
+\setstretch{1}
+    <!-- Set Appendices to single spacing -->
+
+Here is where we can put extra material that is useful, but perhaps not critical to the overall paper. This could include instruments, consent forms, additional syntax, proofs, supplemental graphics, etc.

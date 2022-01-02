@@ -17,39 +17,40 @@ plan_b: false     # Change to plan_b: true if you are formatting a MA Plan B Pap
 # ----------------- Rendering Options ------------------------------------------
 #
 knit: "bookdown::render_book"
-site: bookdown::bookdown_site
 output: 
-  gopherdown::thesis_pdf: default
+  gopherdown::thesis_pdf:
+    latex-engine: xelatex
 #
 # ----------------- Fonts ------------------------------------
 #
 mainfont: "Times New Roman"
-sansfont: "Times New Roman"
+sansfont: "Arial"
 monofont: "Courier"
+#
+# ----------------- Link Highlighting ------------------------------------
+#
+link-citations: true             # make citations clickable
+colored-not-bordered-links: true # use colored links; no border
+# Set link colors using HEX.
+# If printing a physical version of your thesis, you'll want to comment out the next three lines.
+urlcolor-hex: "2C6DAC"     # web addresses
+citecolor-hex: "2C6DAC"    # citations
+linkcolor-hex: "2C6DAC"    # links to sections in your thesis
 #
 # ----------------- Bibliography/References ------------------------------------
 #
-bibliography: ["bib/references.bib", "bib/thesis.bib"]
+bibliography: ["bib/references.bib", "bib/packages.bib"]
 csl: "csl/apa.csl"
+#citation_package: "biblatex"
+# biblatexoptions: [backend=biber]
+# biblio-style: "apa"
 nocite: | 
-  @angel2000, @angel2001, @angel2002a
-#
-# ----------------- Make citations clickable -----------------------------------
-#
-link-citations: yes
+  @wickham:2019, @xie:2021a, @zhu:2021
 #
 # ----------------- Create List of tables and Figures --------------------------
 #
 lot: true
 lof: true
-#
-# ----------------- Uncomment the lines in this section to add LaTeX packages --
-#
-# header-includes:
-#- \usepackage{tikz}
-#- \usepackage{chemarr} %% Useful for one reaction arrow, useless if you're not a chem major
-#- \usepackage{times} % Additional fonts, e.g.,  times, bookman, charter, palatino
-#- \usepackage{esint} % Extended set of integrals
 #
 # ----------------- Optional Frontmatter --------------------------------------
 #
@@ -66,7 +67,7 @@ Above is the YAML (YAML Ain't Markup Language) header that includes a lot of
 metadata used to produce the document.  Be careful with spacing in this header!
 
 In the Optional Frontmatter section comment out or delete frontmatter you don't want
-For example, if you'd prefer to not include a Dedication, simply delete lines 58-59
+For example, if you'd prefer to not include a Dedication, simply delete lines 67-68
 or add a # before them to comment them out.  
 
 If you'd like to include a comment that won't be produced in your resulting file
@@ -80,6 +81,7 @@ thesis.Rmd file and then knit again.
 
 
 
+
 ```{r setup, echo=FALSE, cache=FALSE, message=FALSE}
 ## Load libraries
 library(formatR)
@@ -89,8 +91,9 @@ library(tidyverse)
 
 ## Set global options
 options(
-  max.print = "60", #Printing width
-  scipen = 5        #Penalty for scientific notation
+  max.print = "60",   #Printing width
+  scipen = 5,         #Penalty for scientific notation
+  knitr.kable.na = '' #Leave a blank space instead of printing NA in kable() tables
   )
 
 ## Set default knitr chunk options
@@ -106,9 +109,6 @@ opts_chunk$set(
   fig.align = 'center', 
   out.width = '40%'
   )
-
-## Set knitr package options
-# opts_knit$set(width=50) #Set width of knitted output in document
 ```
 
 

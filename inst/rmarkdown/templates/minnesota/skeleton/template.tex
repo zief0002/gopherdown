@@ -2,140 +2,117 @@
 %% Preamble
 %% ------------------------------------------------------------------- %%
 
-\documentclass[11pt,english]{umnthesis}
+\documentclass[11pt]{umnthesis}
 
-% Better math support
-\usepackage{mathptmx}  % Define Adobe Times Roman (or equivalent) as default text font, and provides math support
-\renewcommand{\sfdefault}{lmss}  % Use Latin Modern slanted font (lmss) for math
-\renewcommand{\ttdefault}{lmtt}  % Use Latin Modern typewriter text (lmtt) for math
-\usepackage[T1]{fontenc}         % Select font encoding
-\usepackage[utf8]{inputenc}      % Accept different input encodings
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}      % Select font encoding
+\usepackage[utf8]{inputenc}   % Accept different input encodings
+\usepackage{csquotes}         % Advanced facilities for inline and display quotations
+\usepackage{caption}          % Captioning options
 
-% Set margins
-\usepackage{geometry}
-\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+%% ------------------------------------------------------------------- %%
+%% Better tables
+%% ------------------------------------------------------------------- %%
 
-% Define TOC counters
+\usepackage{longtable}  % Allow tables that break across pages
+\usepackage{booktabs}   % Better formatted tables
+\usepackage{multirow}   % Allow for row spans
+\usepackage{pdflscape}  % Landscape page orientation
+\usepackage{tabu}       % Flexible tables
+
+%% --------------- Define \thead{} --------------- %%
+
+\usepackage{makecell}          % Allow breaks in table cells; header alignment
+\renewcommand{\theadalign}{bc} % Set table header alignment: bottom, center
+
+
+%% ------------------------------------------------------------------- %%
+%% Define TOC counters
+%% ------------------------------------------------------------------- %%
+
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
 
-\usepackage{color}     % More color options
-\usepackage{babel}     % Multilingual support
-\usepackage{graphicx}  % Better graphics support
 
-% Support for setting the spacing between lines in a document
-\usepackage{setspace}
-\doublespacing
+%% ------------------------------------------------------------------- %%
+%% Define captioning for tables and figures (default = APA)
+%% ------------------------------------------------------------------- %%
 
-\usepackage{latexsym} % Add LaTeX symbols
+\captionsetup[table]{textfont={it}, labelfont={}, justification=raggedright, skip=0pt, singlelinecheck=false, labelsep=newline}
+\captionsetup[figure]{textfont={}, labelfont={it}, justification=raggedright, singlelinecheck=false, labelsep=period}
 
-% Better tables
-\usepackage{longtable}
-\usepackage{booktabs}
-\usepackage{lmodern}
 
-% Do not float figures/tables 
-\usepackage{float}
+%% ------------------------------------------------------------------- %%
+%% Figure/table floating
+%% ------------------------------------------------------------------- %%
+
+%% Do not float figures/tables
+\usepackage{float} 
 \floatplacement{figure}{H}
 
-\usepackage{rotating}   % For rotating figures/tables
 
-% Support for hyperreferences/links
-\usepackage{xurl}       % Allow URL breaks
-\usepackage[unicode=true,
- bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
- breaklinks=true,pdfborder={0 0 0},pdfborderstyle={},backref=false,colorlinks=true]
- {hyperref}
-\hypersetup{pdftitle={University of Minnesota Thesis Template},
- pdfauthor={Anonymous},
- pdfsubject={A Thesis},
- urlcolor={black},citecolor={black},allcolors={black}}
+%% ------------------------------------------------------------------- %%
+%% Support for hyperreferences/links 
+%% ------------------------------------------------------------------- %%
+
+\usepackage{xurl}   % Allow URL breaks
 
 
-%%% Uncomment the following two lines to use the new biblatex-chicago style, for Chicago A. 
-%%% Also make some changes at the end where the bibliography is included.
-%\usepackage{biblatex-chicago}
-%\bibliography{thesis}
+%% --------------- Define link colors --------------- %%
+
+$if(linkcolor-hex)$
+\definecolor{mylinkcolor}{HTML}{$linkcolor-hex$}
+$endif$
+$if(urlcolor-hex)$
+\definecolor{myurlcolor}{HTML}{$urlcolor-hex$}
+$endif$
+$if(citecolor-hex)$
+\definecolor{mycitecolor}{HTML}{$citecolor-hex$}
+$endif$
 
 
-% Use ref for internal links
-\renewcommand{\hyperref}[2][???]{\autoref{#1}}
-\def\chapterautorefname{Chapter}
-\def\sectionautorefname{Section}
-\def\subsectionautorefname{Subsection}
+%% --------------- Bordered links --------------- %%
 
-% Set up captioning
-\usepackage{caption}
-\captionsetup{width=5in}
+$if(colored-not-bordered-links)$
+\hypersetup{
+  hidelinks,
+  colorlinks,
+  linktocpage=$if(toc-link-page-numbers)$$toc-link-page-numbers$$else$false$endif$,
+  linkcolor=$if(linkcolor-hex)$mylinkcolor$else$.$endif$,
+  urlcolor=$if(urlcolor-hex)$myurlcolor$else$.$endif$,
+  citecolor=$if(citecolor-hex)$mycitecolor$else$.$endif$
+}
+
+
+%% --------------- No colored links --------------- %%
+
+$else$
+\hypersetup{
+  colorlinks=false,
+  linktocpage=$if(link-toc-page)$$link-toc-page$$else$true$endif$,
+  linkbordercolor=$if(linkcolor-hex)$mylinkcolor$else$.$endif$,
+  urlbordercolor=$if(urlcolor-hex)$myurlcolor$else$.$endif$,
+  citebordercolor=$if(citecolor-hex)$mycitecolor$else$.$endif$
+}
+$endif$
+
+
+%% ------------------------------------------------------------------- %%
+%% Subfigures 
+%% ------------------------------------------------------------------- %%
 
 \makeatletter
-
-\usepackage{dcolumn} % Used to align decimal point in table columns
 
 
 \@ifundefined{showcaptionsetup}{}{%
   \PassOptionsToPackage{caption=false}{subfig}}
-\usepackage{subfig}
+%\usepackage{subfig}
 \makeatother
 
-% Typeset source code listings
-\usepackage{listings}
-\renewcommand{\lstlistingname}{\inputencoding{latin9}Listing}
 
-
-%% ------------------------------------------------------------------- %%
-%% These additions are made to make the template play nice with pandoc
-%% ------------------------------------------------------------------- %%
-
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\usepackage{fancyvrb}
-\let\iint=\relax
-\let\iiint=\relax
-\let\iiiint=\relax
-\let\idotsint=\relax
-\usepackage{amsmath}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}\linespread{1}\normalfont\ttfamily}
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\usepackage{float}
-
-
-%% ------------------------------------------------------------------- %%
-%% These additions are from {rticles} to make the references play nice with pandoc
-%% ------------------------------------------------------------------- %%
+% %% ------------------------------------------------------------------- %%
+% %% These additions are from {rticles} to make the references play nice with pandoc
+% %% ------------------------------------------------------------------- %%
 
 $if(csl-refs)$
 \newlength{\csllabelwidth}
@@ -171,7 +148,56 @@ $endif$
 
 
 %% ------------------------------------------------------------------- %%
-%% Define things from the YAML in the skeleton.RMD file
+%% Include additional LaTeX packages/commands 
+%% ------------------------------------------------------------------- %%
+
+% \usepackage{dcolumn}    % Used to align decimal point in table columns
+% \usepackage{latexsym}   % Add LaTeX symbols
+% \usepackage{lmodern}    % Latin modern fonts
+
+%% --------------- Centered table columns --------------- %%
+
+% \usepackage{array}
+% \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+
+%% --------------- textsquare from amsthm --------------- %%
+ 
+% \DeclareRobustCommand{\textsquare}{\begingroup\usefont{U}{msa}{m}{n}\thr@@\endgroup}
+
+
+%% --------------- Example environment --------------- %%
+
+% \usepackage[thmmarks,amsmath]{ntheorem}
+% \theoremstyle{break}
+% \theorembodyfont{\rm}
+% \theoremsymbol{\textsquare}
+% \setlength\theorempreskipamount{\baselineskip}
+% \newtheorem{example}{Example}[chapter]
+% \labelformat{example}{Example~#1}
+
+
+%% --------------- Proof environment --------------- %%
+
+% \newtheorem{proof}{Proof}[chapter]
+% \labelformat{proof}{Proof~#1}
+
+
+%% --------------- Useful math operators --------------- %%
+
+% \DeclareMathOperator{\Var}{Var}
+% \DeclareMathOperator{\Cov}{Cov}
+% \DeclareMathOperator{\Unif}{Unif}
+% \DeclareMathOperator{\Poi}{Poi}
+
+% from Prof. Weisberg:
+% \DeclareMathOperator{\indep}{\;\,\rule[0em]{.03em}{.6em}\hspace{-.25em}%
+% 	\rule[0em]{.65em}{.03em}\hspace{-.25em}\rule[0em]{.03em}{.6em}\;\,} 
+
+
+
+%% ------------------------------------------------------------------- %%
+%% Define things from the YAML in the index.RMD file
 %% ------------------------------------------------------------------- %%
 
 \title{$title$}
@@ -184,15 +210,22 @@ $if(coadvisor)$
   \coadvisor{$coadvisor$}
 $endif$
 
+
+
 %% ------------------------------------------------------------------- %%
-%% Create the thesis
+%% Document body
 %% ------------------------------------------------------------------- %%
 
 \begin{document}
 
+\frenchspacing % one space after sentences
+
+
+%% --------------- Signature, title, and copyright pages --------------- %%
+
 $if(phd)$
-\makesignaturepage % required
-\maketitlepage % required
+\makesignaturepage % required by UMN
+\maketitlepage % required by UMN
 \makecopyrightpage % recommended, required if registering copyright
 $elseif(plan_b)$
 \makeplanbtitlepage % required
@@ -202,8 +235,14 @@ $else$
 \makecopyrightpage % recommended, required if registering copyright
 $endif$
 
+
+%% --------------- Frontmatter --------------- %%
+
 \frontmatter
 \pagestyle{empty} % this removes page numbers from the frontmatter
+
+
+%% --------------- Acknowledgements --------------- %%
 
 $if(acknowledgements)$
   \begin{acknowledgements}
@@ -211,11 +250,17 @@ $if(acknowledgements)$
   \end{acknowledgements}
 $endif$
 
+
+%% --------------- Dedication --------------- %%
+
 $if(dedication)$
   \begin{dedication}
     $dedication$
   \end{dedication}
 $endif$
+
+
+%% --------------- Abstract --------------- %%
 
 $if(abstract)$
   \begin{abstract}
@@ -224,6 +269,7 @@ $if(abstract)$
 $endif$
 
 
+%% --------------- Table of contents --------------- %%
 
 \makeatletter
 \def\maxwidth{ %
@@ -239,16 +285,13 @@ $endif$
 
 \setlength{\parskip}{0pt}
 
-% % Added by CII
-% $if(space_between_paragraphs)$
-%   %\setlength{\parskip}{\baselineskip}
-%   \usepackage[parfill]{parskip}
-% $endif$
-
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 \tableofcontents{}
+
+
+%% --------------- List of tables --------------- %%
 
 $if(lot)$
   \cleardoublepage
@@ -257,15 +300,23 @@ $if(lot)$
 $endif$
 
 
+%% --------------- List of figures --------------- %%
+
 $if(lof)$
   \cleardoublepage
   \addcontentsline{toc}{chapter}{List of Figures} 
   \listoffigures
 $endif$
 
-\mainmatter % here the regular arabic numbering starts
+
+%% --------------- Mainmatter --------------- %%
+
+% Here the regular arabic numbering starts
+
+\mainmatter 
 \pagestyle{fancyplain} % turns page numbering back on
 
 $body$
+
 
 \end{document}

@@ -8,7 +8,7 @@
 %% Useful LaTeX packages for mathematics
 %% ------------------------------------------------------------------- %%
 
-\RequirePackage[fleqn]{amsmath}
+\RequirePackage{amsmath}
 \RequirePackage{amssymb}
 
 %% ------------------------------------------------------------------- %%
@@ -22,7 +22,8 @@
 %% ------------------------------------------------------------------- %%
 
 \RequirePackage{setspace}
-\setstretch{1.5}
+\doublespacing
+% \setstretch{1.5}
 
 %% ------------------------------------------------------------------- %%
 %% Make the chapter headings look right,  given double spacing
@@ -88,6 +89,8 @@
 Name of Faculty Co-Advisor\par%
 \vskip 5em\hrule\par\vskip 0.5em%
 Signature of Faculty Co-Advisor\par%
+\vskip 5em\hrule\par\vskip 0.5em%
+Date\par%
 \end{center}\end{minipage}%
 \hskip 0.4in%
 \begin{minipage}{2.8in}\begin{center}%
@@ -96,9 +99,9 @@ Signature of Faculty Co-Advisor\par%
 Name of Faculty Co-Advisor\par%
 \vskip 5em\hrule\par\vskip 0.5em%
 Signature of Faculty Co-Advisor\par%
-\end{center}\end{minipage}%
-\vskip 5em\hrule\vskip 0.5em%
+\vskip 5em\hrule\par\vskip 0.5em%
 Date\par%
+\end{center}\end{minipage}%
 }
 
 \newcommand\oneadvisorsignature[1]{%
@@ -118,9 +121,9 @@ Date\par%
 {\Large\thesisEmph{University of Minnesota}\par}%
 \vfill%
 {This is to certify that I have examined\\this copy of a doctoral dissertation by\par}%
-\vskip 1em%
+\vskip 2em%
 {\large\@author\par}%
-\vskip 1em%
+\vskip 2em%
 {and have found that it is complete and satisfactory in all respects,\\
 and that any and all revisions required by the final \\
 examining committee have been made.\par}
@@ -259,12 +262,6 @@ examining committee have been made.\par}
         \addcontentsline{toc}{chapter}{#1}
 }
 
-% Don't give bibliography a chapter number
-\RequirePackage{natbib}
-\renewcommand\bibsection{\chapterX{\bibname}}
-
-% Make Bibliography called "References"
-\renewcommand\bibname{References}
 
 % make headings look nicer
 \RequirePackage{fancyhdr}
@@ -325,47 +322,72 @@ examining committee have been made.\par}
 \RequirePackage[format=hang, justification=raggedright]{subfig}
 \labelformat{subfigure}{\figurename~\thefigure#1}
 
-% make Figure Environment that Ignores end-of-lines so that using subfigures isn't so particular about spacing
-\begingroup%
-\catcode`\^^M=\active%
-\gdef\Moff{\catcode`\^^M=\active\def^^M{\ignorespaces}}%
-\endgroup
 
-\let\origfigure=\figure
-\let\endorigfigure=\endfigure
-\renewenvironment{figure}%
-{%
-\begingroup%
-\Moff
-\begin{origfigure}\centering%
-}%
-{%
-\end{origfigure}%
-\endgroup%
-}%
+% %% ------------------------------------------------------------------- %%
+% %% Make better internal links
+% %% ------------------------------------------------------------------- %%
 
-% ----- Example Environment -----
-% textsquare from amsthm
-\DeclareRobustCommand{\textsquare}{\begingroup\usefont{U}{msa}{m}{n}\thr@@\endgroup}
-\RequirePackage[thmmarks,amsmath,fleqn]{ntheorem}
-\theoremstyle{break}
-\theorembodyfont{\rm}
-\theoremsymbol{\textsquare}
-\setlength\theorempreskipamount{\baselineskip}
-\newtheorem{example}{Example}[chapter]
-\labelformat{example}{Example~#1}
+\RequirePackage[pdfpagelabels]{hyperref}
 
-\newtheorem{proof}{Proof}[chapter]
-\labelformat{proof}{Proof~#1}
+\renewcommand{\hyperref}[2][???]{\autoref{#1}}
+\def\chapterautorefname{Chapter}
+\def\sectionautorefname{Section}
+\def\subsectionautorefname{Subsection}
+\def\equationautorefname{Equation}
 
-% ----- Useful Math Operators -----
-\DeclareMathOperator{\Var}{Var}
-\DeclareMathOperator{\Cov}{Cov}
-\DeclareMathOperator{\Unif}{Unif}
-\DeclareMathOperator{\Poi}{Poi}
-% from Prof. Weisberg:
-\DeclareMathOperator{\indep}{\;\,\rule[0em]{.03em}{.6em}\hspace{-.25em}%
-	\rule[0em]{.65em}{.03em}\hspace{-.25em}\rule[0em]{.03em}{.6em}\;\,} 
+
+%% ------------------------------------------------------------------- %%
+%% These additions are made to make the template play nice with pandoc
+%% ------------------------------------------------------------------- %%
+\RequirePackage{fancyvrb}
+\RequirePackage{framed}
+\RequirePackage{xcolor}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\let\iint=\relax
+\let\iiint=\relax
+\let\iiiint=\relax
+\let\idotsint=\relax
+
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}\linespread{1}\normalfont\ttfamily}
+
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+
 
 % ----- For Including Graphics -----
 \RequirePackage{graphicx}

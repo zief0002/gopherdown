@@ -1,0 +1,3 @@
+# A Second Appendix {#appendix-b}
+
+Here is where we can put extra material that is useful, but perhaps not critical to the overall paper. This could include instruments, consent forms, additional syntax, proofs, supplemental graphics, etc.
