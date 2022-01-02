@@ -4,9 +4,9 @@ output: github_document
 
 # gopherdown
 
-This project is a modified version Chester Ismay's [thesisdown](https://github.com/ismayc/thesisdown) package to provide support for the University of Minnesota's thesis.
+This project is a modified version Chester Ismay's [thesisdown](https://github.com/ismayc/thesisdown) package to provide support for the University of Minnesota's thesis.Currently, the PDF version is fully functional. All other versions are derived from thesisdown and are not guaranteed to work.
 
-Currently, the PDF version is fully functional. All other versions are derived from thesisdown and are not guaranteed to work.
+An example of using this can be found [here](https://github.com/zief0002/dissertation), where I re-created my own PhD thesis.
 
 
 ## Installation
